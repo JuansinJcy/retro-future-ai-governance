@@ -39,6 +39,11 @@ export function CtaFooter() {
             Vol.01 / Ed. Civil / Distribución libre
           </p>
         </div>
+        <div className="border-t-2 border-foreground bg-foreground py-4">
+          <p className="font-mono-retro text-center text-xs uppercase tracking-[0.3em] text-mustard">
+            ✦ Autor · Juan Carlos Yepez Kepp ✦
+          </p>
+        </div>
       </footer>
     </>
   );
