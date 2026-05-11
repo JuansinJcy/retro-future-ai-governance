@@ -1,26 +1,43 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Hero } from "@/components/landing/Hero";
+import { WhatIsSection } from "@/components/landing/WhatIsSection";
+import { WhyImportantSection } from "@/components/landing/WhyImportantSection";
+import { EthicalUseSection } from "@/components/landing/EthicalUseSection";
+import { WhatCanYouDoSection } from "@/components/landing/WhatCanYouDoSection";
+import { CtaFooter } from "@/components/landing/CtaFooter";
 
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      {
+        title: "Gobernanza en IA y Uso Ético | Manual Civil",
+      },
+      {
+        name: "description",
+        content:
+          "Una guía clara y accesible sobre Gobernanza en IA: principios, ética, transparencia y acciones para un uso responsable de la Inteligencia Artificial.",
+      },
+      { property: "og:title", content: "Gobernanza en IA y Uso Ético" },
+      {
+        property: "og:description",
+        content:
+          "Principios, ética y acciones para una Inteligencia Artificial justa, transparente y segura.",
+      },
+      { property: "og:type", content: "website" },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
-
 function Index() {
-  return <PlaceholderIndex />;
+  return (
+    <main className="min-h-screen bg-background">
+      <Hero />
+      <WhatIsSection />
+      <WhyImportantSection />
+      <EthicalUseSection />
+      <WhatCanYouDoSection />
+      <CtaFooter />
+    </main>
+  );
 }
