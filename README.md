@@ -1,8 +1,7 @@
-div align="centro">
 
 # 🏛️ Gobernanza e IA
 
-**Manual Vol.01 — Ética e IA**
+**Manual Vol.1 — Ética e IA**
 
 [![Estado](https://img.shields.io/badge/STATUS-ACTIVO-brightgreen?style=flat-square)]()
 [![Versión](https://img.shields.io/badge/VERSIÓN-1.0-blue?style=flat-square)]()
@@ -24,12 +23,12 @@ La Inteligencia Artificial ya no es solo cosa de películas. Está en tu teléfo
 ## ✨ Características
 
 ### 🧭 Sección Héroe — Centro de Gobernanza
-- Pantalla principal con identidad visual del proyecto (insignia **MANUAL / VOL.01 — ÉTICA & IA**)
+- Pantalla principal con identidad visual del proyecto (insignia **MANUAL / VOL.1 — ÉTICA & IA**)
 - Tarjeta institucional del **Centro de Gobernanza AI • ÉTICA**, con referencia **EST. MMXXVI • Programa Civil**
 - Botones de navegación directa: **Explorar Principios** y **Uso Ético**
 - Metadatos en pie de página: versión, misión y estado del proyecto
 
-### 📘 Capítulo 01 — ¿Qué es la Gobe
+### 📘 Capítulo 01 — ¿Qué es la Gobernanza en IA
 - Definición clara y accesible del concepto
 - Cita destacada del *Manual de Gobernanza* con los tres pilares fundamentales resaltados: **justa**, **transparente** y **segura**
 - Sección de principios con tres tareas interactivas:
@@ -144,7 +143,7 @@ Las contribuciones son bienvenidas. Si deseas mejorar el contenido, agregar nuev
 4. Haz **push** a la rama (`git push origin feature/nueva-sección`)
 5. Abre un **Solicitud de extracción**
 
-Por favor, asegúrate de que cual contribución mantiene la filosofía de enfermedad y el tono educativo del proyecto.
+Por favor, asegúrate de que cual contribución mantiene la filosofía de tono educativo del proyecto.
 
 ---
 
@@ -156,9 +155,9 @@ Este proyecto está disponible bajo la licencia **MIT**. Consulta el archivo [LI
 
 ## 💬 Mensaje del Desarrollador
 
-> *"Cuando usamos la IA, no estamos usando una simple herramiento que busca facilitar nuestras labores cotidianas, estamos usando la culminación lógica de años de esfuerzo matemático y probabilista, para obtener resultados inmediatos, facilitando nuestra vida, no es reemplazo y antagonismo tecnológico, es optimización, y la misma puede ser de gran ayuda, solo si saber usar responsable."*
+> *"Cuando usamos la IA, no estamos usando una simple herramienta que busca facilitar nuestras labores cotidianas, estamos usando la culminación lógica de años de esfuerzo matemático y probabilista, para obtener resultados inmediatos, facilitando nuestra vida, no es reemplazo y antagonismo tecnológico, es optimización, y la misma puede ser de gran ayuda, solo si sabemos usarla de forma responsable."*
 >
-> **— Cajero automático: Juan Carlos Yepez Kepp**
+> **— Desarrolador: Juan Carlos Yepez Kepp**
 
 ---
 
