@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gobernanza en IA — Tecnología con Responsabilidad</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===== CSS RESET & VARIABLES ===== */
+        :root {
+            --bg-cream: #F5F1E8;
+            --bg-cream-light: #FAF8F3;
+            --navy: #0F1B2D;
+            --navy-light: #1A2A4A;
+            --blue-accent: #2563EB;
+            --blue-light: #3B82F6;
+            --blue-soft: #4A90C2;
+            --gold: #D4A843;
+            --gold-bright: #E6B941;
+            --gold-badge: #C9A227;
+            --orange: #E8913A;
+            --white: #FFFFFF;
+            --gray-dark: #2D3748;
+            --gray-mid: #4A5568;
+            --gray-light: #7A8B9A;
+            --gray-lighter: #A0AEC0;
+            --border-dark: #1A202C;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+            --radius: 4px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--gray-mid);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== GRID BACKGROUND PATTERN ===== */
+        .grid-bg {
+            background-color: var(--bg-cream);
+            background-image:
+                linear-gradient(rgba(180, 170, 150, 0.12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(180, 170, 150, 0.12) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        .dots-bg {
+            background-color: var(--bg-cream);
+            background-image: radial-gradient(circle, rgba(100, 90, 70, 0.08) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* ===== LAYOUT ===== */
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== SECTION 1: HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 60px 0;
+        }
+
+        .hero-grid {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            width: 100%;
+        }
+
+        .hero-left {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .hero-right {
+            flex-shrink: 0;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold-badge), var(--gold-bright));
+            color: var(--navy);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            padding: 6px 14px;
+            border: 2px solid var(--navy);
+            margin-bottom: 28px;
+            text-transform: uppercase;
+        }
+
+        /* Hero Heading */
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.15;
+            color: var(--navy);
+            margin-bottom: 20px;
+        }
+
+        .hero-title .highlight {
+            color: var(--blue-accent);
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--gray-mid);
+            margin-bottom: 32px;
+            max-width: 520px;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--blue-accent);
+            color: var(--white);
+            border-radius: var(--radius);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--blue-light);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background-color: var(--white);
+            color: var(--navy);
+            border: 2px solid var(--navy);
+            border-radius: var(--radius);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--navy);
+            color: var(--white);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-badge), var(--gold-bright));
+            color: var(--navy);
+            border: 2px solid var(--navy);
+            border-radius: var(--radius);
+        }
+
+        .btn-gold:hover {
+            box-shadow: 0 4px 16px rgba(212, 168, 67, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* Status indicators */
+        .status-bar {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-line {
+            width: 3px;
+            height: 36px;
+            border-radius: 2px;
+        }
+
+        .status-line.blue { background-color: var(--blue-accent); }
+        .status-line.gold { background-color: var(--gold); }
+        .status-line.dark { background-color: var(--navy); }
+
+        .status-label {
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: var(--gray-light);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .status-value {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        /* Institutional Card */
+        .institution-card {
+            background: var(--white);
+            border: 3px solid var(--navy);
+            padding: 48px 44px;
+            width: 320px;
+            text-align: center;
+            position: relative;
+        }
+
+        .card-emblem {
+            width: 72px;
+            height: 72px;
+            border: 2.5px solid var(--blue-accent);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-emblem i {
+            font-size: 1.6rem;
+            color: var(--blue-accent);
+        }
+
+        .card-subtitle {
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--gray-light);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--navy);
+            letter-spacing: 0.04em;
+            margin-bottom: 20px;
+        }
+
+        .card-divider {
+            width: 100%;
+            height: 2px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--navy) 0px,
+                var(--navy) 8px,
+                transparent 8px,
+                transparent 12px
+            );
+            margin-bottom: 20px;
+        }
+
+        .card-meta {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--gray-light);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* ===== SECTION 2: CHAPTER 01 ===== */
+        .chapter01 {
+            padding: 80px 0;
+        }
+
+        .chapter01-layout {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .chapter-icon-card {
+            flex-shrink: 0;
+            width: 88px;
+            background: var(--white);
+            border: 2px solid var(--navy);
+            padding: 18px 12px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .chapter-icon-card i {
+            font-size: 1.8rem;
+            color: var(--navy);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .chapter-icon-card span {
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: var(--gray-light);
+            letter-spacing: 0.08em;
+        }
+
+        .chapter-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .section-label {
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--blue-soft);
+            letter-spacing: 0.08em;
+            margin-bottom: 10px;
+        }
+
+        .chapter-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--navy);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .chapter-text {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: var(--gray-mid);
+            margin-bottom: 28px;
+            max-width: 640px;
+        }
+
+        .highlight-orange {
+            color: var(--orange);
+            font-weight: 600;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: #FDF6E3;
+            border-left: 4px solid var(--blue-accent);
+            padding: 22px 28px;
+            margin-bottom: 8px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+        .quote-text {
+            font-style: italic;
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--gray-mid);
+        }
+
+        .quote-citation {
+            font-size: 0.75rem;
+            color: var(--gray-light);
+            text-align: right;
+            margin-top: 4px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+        }
+
+        /* ===== SECTION 2b: PRINCIPLES ===== */
+        .principles-section {
+            padding: 60px 0 80px;
+        }
+
+        .principles-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 16px;
+        }
+
+        .principles-text {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: var(--gray-mid);
+            margin-bottom: 40px;
+            max-width: 680px;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .principle-card {
+            background: var(--white);
+            border: 2px solid var(--navy);
+            padding: 32px 24px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .principle-icon {
+            font-size: 1.5rem;
+            color: var(--blue-accent);
+            margin-bottom: 14px;
+        }
+
+        .principle-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--orange);
+            margin-bottom: 10px;
+        }
+
+        .principle-name {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .principle-desc {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--gray-mid);
+        }
+
+        /* ===== SECTION 3: CHAPTER 02 ===== */
+        .chapter02 {
+            background-color: var(--bg-cream-light);
+            padding: 80px 0;
+        }
+
+        .chapter02-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .chapter02-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--navy);
+            line-height: 1.2;
+        }
+
+        .chapter02-subtitle {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--gray-light);
+            text-align: right;
+            max-width: 260px;
+            letter-spacing: 0.02em;
+            line-height: 1.6;
+        }
+
+        .ethics-cards {
+            background: var(--white);
+            border: 2px solid var(--navy);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            overflow: hidden;
+        }
+
+        .ethics-card {
+            padding: 32px 28px;
+            border-right: 1px solid var(--gray-lighter);
+            transition: background-color 0.2s ease;
+        }
+
+        .ethics-card:last-child {
+            border-right: none;
+        }
+
+        .ethics-card:hover {
+            background-color: #FAFAF7;
+        }
+
+        .ethics-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .ethics-card-icon {
+            font-size: 1.6rem;
+            color: var(--navy);
+        }
+
+        .ethics-code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--gray-light);
+            letter-spacing: 0.06em;
+            background: #F0EDE6;
+            padding: 3px 8px;
+            border-radius: 2px;
+        }
+
+        .ethics-card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .ethics-card-desc {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--gray-mid);
+        }
+
+        /* ===== SECTION 4: ACTIONS ===== */
+        .actions-section {
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+            padding: 80px 0;
+        }
+
+        .actions-label {
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--navy);
+            opacity: 0.6;
+            letter-spacing: 0.08em;
+            margin-bottom: 10px;
+        }
+
+        .actions-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 36px;
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .action-card {
+            background: var(--white);
+            border: 2px solid var(--navy);
+            padding: 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .action-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .action-checkbox {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--navy);
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-checkbox i {
+            font-size: 0.6rem;
+            color: var(--blue-accent);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .action-card:hover .action-checkbox i {
+            opacity: 1;
+        }
+
+        .action-code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: var(--gray-light);
+            letter-spacing: 0.06em;
+            margin-bottom: 4px;
+        }
+
+        .action-text {
+            font-size: 0.92rem;
+            line-height: 1.65;
+            color: var(--gray-mid);
+        }
+
+        /* ===== SECTION 5: ADDITIONAL INFO ===== */
+        .additional-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .additional-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px;
+        }
+
+        .additional-block {
+            padding: 0;
+        }
+
+        .additional-block-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .additional-block-title i {
+            color: var(--blue-accent);
+            font-size: 1rem;
+        }
+
+        .additional-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .additional-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #E8E4DC;
+            font-size: 0.9rem;
+            color: var(--gray-mid);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .additional-list li i {
+            color: var(--gold);
+            font-size: 0.4rem;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        .additional-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* ===== SECTION 6: DEV MESSAGE ===== */
+        .dev-message {
+            padding: 60px 0;
+            background: var(--bg-cream-light);
+        }
+
+        .dev-message-box {
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .dev-message-icon {
+            font-size: 2rem;
+            color: var(--blue-accent);
+            margin-bottom: 16px;
+        }
+
+        .dev-message-quote {
+            font-size: 1.05rem;
+            font-style: italic;
+            line-height: 1.85;
+            color: var(--gray-mid);
+            margin-bottom: 16px;
+        }
+
+        .dev-message-author {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--navy);
+            letter-spacing: 0.06em;
+        }
+
+        /* ===== SECTION 7: CLOSING ===== */
+        .closing {
+            background-color: var(--navy);
+            padding: 80px 0 0;
+            text-align: center;
+        }
+
+        .closing-label {
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+            margin-bottom: 24px;
+        }
+
+        .closing-title {
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .closing-title .gold {
+            color: var(--gold);
+        }
+
+        .closing-subtitle {
+            font-size: 1.05rem;
+            color: var(--gray-lighter);
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .closing-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 0;
+            padding-bottom: 60px;
+        }
+
+        .btn-white {
+            background-color: var(--white);
+            color: var(--navy);
+            border-radius: var(--radius);
+            padding: 12px 24px;
+        }
+
+        .btn-white:hover {
+            background-color: #E8E8E8;
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .btn-blue-dark {
+            background-color: var(--blue-accent);
+            color: var(--white);
+            border-radius: var(--radius);
+            padding: 12px 24px;
+        }
+
+        .btn-blue-dark:hover {
+            background-color: var(--blue-light);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        /* Footer inside closing */
+        .closing-footer {
+            margin-top: 0;
+            background-color: var(--bg-cream);
+            padding: 24px 0;
+        }
+
+        .closing-footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .footer-text {
+            font-size: 0.78rem;
+            color: var(--gray-mid);
+            letter-spacing: 0.04em;
+        }
+
+        .footer-text-right {
+            font-size: 0.78rem;
+            color: var(--gray-mid);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        /* Author bar */
+        .author-bar {
+            background-color: var(--navy);
+            padding: 18px 0;
+            text-align: center;
+        }
+
+        .author-text {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 2.6rem;
+            }
+
+            .principles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .ethics-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .ethics-card {
+                border-right: none;
+                border-bottom: 1px solid var(--gray-lighter);
+            }
+
+            .ethics-card:last-child {
+                border-bottom: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: auto;
+                padding: 48px 0;
+            }
+
+            .hero-grid {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .hero-right {
+                align-self: center;
+            }
+
+            .institution-card {
+                width: 280px;
+                padding: 36px 28px;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .chapter01-layout {
+                flex-direction: column;
+            }
+
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chapter02-header {
+                flex-direction: column;
+            }
+
+            .chapter02-subtitle {
+                text-align: left;
+                max-width: 100%;
+            }
+
+            .additional-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .closing-title {
+                font-size: 1.8rem;
+            }
+
+            .closing-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .closing-footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .status-bar {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .badge {
+                font-size: 0.65rem;
+                padding: 5px 10px;
+            }
+
+            .btn {
+                padding: 10px 18px;
+                font-size: 0.75rem;
+            }
+
+            .container {
+                padding: 0 16px;
+            }
+
+            .chapter-title {
+                font-size: 1.7rem;
+            }
+
+            .principles-title {
+                font-size: 1.6rem;
+            }
+
+            .closing-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-cream);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gray-lighter);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-light);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =============================== -->
+    <!-- SECTION 1: HERO / PORTADA       -->
+    <!-- =============================== -->
+    <section class="hero grid-bg">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-left fade-in">
+                    <div class="badge">MANUAL / VOL.01 &mdash; ÉTICA &amp; IA</div>
+
+                    <h1 class="hero-title">
+                        Gobernanza en IA:<br>
+                        <span class="highlight">Tecnología con</span><br>
+                        Responsabilidad.
+                    </h1>
+
+                    <p class="hero-desc">
+                        Un conjunto de reglas, principios y leyes para asegurar que la Inteligencia Artificial se desarrolle y utilice de manera <strong>justa</strong>, <strong>transparente</strong> y <strong>segura</strong>.
+                    </p>
+
+                    <div class="btn-group">
+                        <a href="#capitulo01" class="btn btn-primary">
+                            <i class="fas fa-play" style="font-size:0.6rem"></i> Explorar Principios
+                        </a>
+                        <a href="#capitulo02" class="btn btn-secondary">Uso Ético</a>
+                    </div>
+
+                    <div class="status-bar">
+                        <div class="status-item">
+                            <div class="status-line blue"></div>
+                            <div>
+                                <div class="status-label">Versión</div>
+                                <div class="status-value">1.0 / 2026</div>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-line gold"></div>
+                            <div>
+                                <div class="status-label">Misión</div>
+                                <div class="status-value">AI-ETHIC-01</div>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-line dark"></div>
+                            <div>
+                                <div class="status-label">Status</div>
+                                <div class="status-value">Activo</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-right fade-in delay-2">
+                    <div class="institution-card">
+                        <div class="card-emblem">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="card-subtitle">Centro de Gobernanza</div>
+                        <div class="card-title">AI &bull; ÉTICA</div>
+                        <div class="card-divider"></div>
+                        <div class="card-meta">Est. MMXXVI &bull; Programa Civil</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- SECTION 2: CAPÍTULO 01          -->
+    <!-- =============================== -->
+    <section id="capitulo01" class="chapter01 grid-bg">
+        <div class="container">
+            <div class="chapter01-layout">
+                <div class="chapter-icon-card">
+                    <i class="fas fa-globe-americas"></i>
+                    <span>CAP. 01</span>
+                </div>
+
+                <div class="chapter-content">
+                    <div class="section-label">// DEFINICIÓN</div>
+                    <h2 class="chapter-title">¿Qué es la Gobernanza en IA?</h2>
+                    <p class="chapter-text">
+                        La <span class="highlight-orange">Inteligencia Artificial</span> ya no es solo cosa de películas. Está en tu teléfono, en las recomendaciones de streaming, en los asistentes virtuales e incluso en los diagnósticos médicos. Pero, ¿quién decide cómo se usa? La gobernanza en IA existe justamente para responder a esa pregunta: es el marco de reglas y principios que aseguran que estas tecnologías se desarrollen y apliquen de forma responsable.
+                    </p>
+
+                    <div class="quote-box">
+                        <p class="quote-text">
+                            &ldquo;Un conjunto de reglas, principios y leyes para asegurar que la IA se desarrolle de manera <span class="highlight-orange">justa, transparente y segura</span>.&rdquo;
+                        </p>
+                        <p class="quote-citation">&mdash; Manual de Gobernanza, F. 12</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- SECTION 2b: PRINCIPIOS           -->
+    <!-- =============================== -->
+    <section class="principles-section dots-bg">
+        <div class="container">
+            <div class="section-label">// PRINCIPIOS</div>
+            <h2 class="principles-title">¿Por qué es importante?</h2>
+            <p class="principles-text">
+                Imagina que un algoritmo decide quién recibe un préstamo, un trabajo o un tratamiento médico. Si tiene sesgos, podría excluir a personas. La gobernanza busca evitarlo garantizando tres pilares:
+            </p>
+
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-icon"><i class="far fa-eye"></i></div>
+                    <div class="principle-number">01</div>
+                    <h3 class="principle-name">Sea transparente</h3>
+                    <p class="principle-desc">Que podamos entender cómo la IA toma decisiones &mdash; sin cajas negras.</p>
+                </div>
+
+                <div class="principle-card">
+                    <div class="principle-icon"><i class="fas fa-balance-scale"></i></div>
+                    <div class="principle-number">02</div>
+                    <h3 class="principle-name">Sea justa</h3>
+                    <p class="principle-desc">Que no discrimine a nadie por género, raza, edad o condición.</p>
+                </div>
+
+                <div class="principle-card">
+                    <div class="principle-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="principle-number">03</div>
+                    <h3 class="principle-name">Sea segura</h3>
+                    <p class="principle-desc">Que no ponga en riesgo a las personas, ni en lo digital ni en lo físico.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- SECTION 3: CAPÍTULO 02          -->
+    <!-- =============================== -->
+    <section id="capitulo02" class="chapter02">
+        <div class="container">
+            <div class="chapter02-header">
+                <div>
+                    <div class="section-label">// CAPÍTULO 02</div>
+                    <h2 class="chapter02-title">Uso Ético de la IA:<br>más que código</h2>
+                </div>
+                <div class="chapter02-subtitle">
+                    LA ÉTICA EN IA NO ES SOLO &ldquo;NO HACER DAÑO&rdquo;.<br>
+                    TAMBIÉN ES CONSTRUIR BIEN.
+                </div>
+            </div>
+
+            <div class="ethics-cards">
+                <div class="ethics-card">
+                    <div class="ethics-card-header">
+                        <i class="fas fa-user-shield ethics-card-icon"></i>
+                        <span class="ethics-code">PRV-001</span>
+                    </div>
+                    <h3 class="ethics-card-title">Privacidad</h3>
+                    <p class="ethics-card-desc">Que tus datos personales no se utilicen sin tu permiso. La privacidad es un derecho fundamental, no un ajuste opcional en la configuración.</p>
+                </div>
+
+                <div class="ethics-card">
+                    <div class="ethics-card-header">
+                        <i class="fas fa-hand-holding-heart ethics-card-icon"></i>
+                        <span class="ethics-code">RES-002</span>
+                    </div>
+                    <h3 class="ethics-card-title">Responsabilidad</h3>
+                    <p class="ethics-card-desc">Que alguien responda si la IA comete un error. Donde hay poder algorítmico, debe haber rendición de cuentas clara y efectiva.</p>
+                </div>
+
+                <div class="ethics-card">
+                    <div class="ethics-card-header">
+                        <i class="fas fa-globe-americas ethics-card-icon"></i>
+                        <span class="ethics-code">SOC-003</span>
+                    </div>
+                    <h3 class="ethics-card-title">Beneficio social</h3>
+                    <p class="ethics-card-desc">Que la IA ayude a resolver problemas globales &mdash; no solo a generar ganancias. La tecnología debe estar al servicio de la humanidad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- SECTION 4: ACCIONES             -->
+    <!-- =============================== -->
+    <section class="actions-section">
+        <div class="container">
+            <div class="actions-label">// ACCIÓN</div>
+            <h2 class="actions-title">¿Qué puedes hacer tú?</h2>
+
+            <div class="actions-grid">
+                <div class="action-card">
+                    <div class="action-checkbox"><i class="fas fa-check"></i></div>
+                    <div>
+                        <div class="action-code">ACCIÓN 01</div>
+                        <p class="action-text">Cuestiona los resultados que te entrega un sistema automatizado.</p>
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-checkbox"><i class="fas fa-check"></i></div>
+                    <div>
+                        <div class="action-code">ACCIÓN 02</div>
+                        <p class="action-text">Lee las políticas de privacidad antes de aceptar.</p>
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-checkbox"><i class="fas fa-check"></i></div>
+                    <div>
+                        <div class="action-code">ACCIÓN 03</div>
+                        <p class="action-text">Apoya iniciativas y leyes que regulen la IA con criterio.</p>
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-checkbox"><i class="fas fa-check"></i></div>
+                    <div>
+                        <div class="action-code">ACCIÓN 04</div>
+                        <p class="action-text">Aprende lo básico sobre cómo funcionan los algoritmos.</p>
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-checkbox"><i class="fas fa-check"></i></div>
+                    <div>
+                        <div class="action-code">ACCIÓN 05</div>
+                        <p class="action-text">Comparte conocimiento ético con tu comunidad.</p>
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-checkbox"><i class="fas fa-check"></i></div>
+                    <div>
+                        <div class="action-code">ACCIÓN 06</div>
+                        <p class="action-text">Reporta usos abusivos o discriminatorios de la IA.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- SECTION 5: INFORMACIÓN ADICIONAL -->
+    <!-- =============================== -->
+    <section class="additional-section">
+        <div class="container">
+            <div class="section-label" style="margin-bottom:8px;">// CONTEXTO GLOBAL</div>
+            <h2 class="principles-title" style="margin-bottom:36px;">Marco Internacional de Gobernanza</h2>
+
+            <div class="additional-grid">
+                <div class="additional-block">
+                    <h3 class="additional-block-title"><i class="fas fa-landmark"></i> Regulaciones Clave</h3>
+                    <ul class="additional-list">
+                        <li><i class="fas fa-circle"></i> <strong>EU AI Act</strong> &mdash; Primer marco regulatorio integral de IA (2024). Clasifica sistemas por nivel de riesgo.</li>
+                        <li><i class="fas fa-circle"></i> <strong>Blueprint for AI Bill of Rights</strong> &mdash; Guía de la Casa Blanca para la IA segura y protegida.</li>
+                        <li><i class="fas fa-circle"></i> <strong>Convención del Consejo de Europa</strong> &mdash; Primer tratado internacional vinculante sobre IA.</li>
+                        <li><i class="fas fa-circle"></i> <strong>Principios de la OCDE</strong> &mdash; Recomendaciones adoptadas por más de 40 países para IA responsable.</li>
+                    </ul>
+                </div>
+
+                <div class="additional-block">
+                    <h3 class="additional-block-title"><i class="fas fa-universal-access"></i> Principios Universales</h3>
+                    <ul class="additional-list">
+                        <li><i class="fas fa-circle"></i> <strong>Transparencia algorítmica</strong> &mdash; Derecho a entender las decisiones automatizadas.</li>
+                        <li><i class="fas fa-circle"></i> <strong>No discriminación</strong> &mdash; Garantía de equidad independientemente del grupo demográfico.</li>
+                        <li><i class="fas fa-circle"></i> <strong>Seguridad y robustez</strong> &mdash; Sistemas que funcionen de forma fiable en todas las condiciones.</li>
+                        <li><i class="fas fa-circle"></i> <strong>Responsabilidad humana</strong> &mdash; Siempre debe existir supervisión y control por parte de personas.</li>
+                    </ul>
+                </div>
+
+                <div class="additional-block">
+                    <h3 class="additional-block-title"><i class="fas fa-chart-line"></i> Datos Relevantes</h3>
+                    <ul class="additional-list">
+                        <li><i class="fas fa-circle"></i> <strong>85%</strong> de los proyectos de IA presentan sesgos según estudios de MIT.</li>
+                        <li><i class="fas fa-circle"></i> <strong>72%</strong> de la población mundial carece de marcos regulatorios de IA.</li>
+                        <li><i class="fas fa-circle"></i> <strong>$15.7T</strong> es la contribución proyectada de la IA al PIB global para 2030.</li>
+                        <li><i class="fas fa-circle"></i> <strong>3 de cada 4</strong> empresas no cuentan con comités de ética en IA.</li>
+                    </ul>
+                </div>
+
+                <div class="additional-block">
+                    <h3 class="additional-block-title"><i class="fas fa-users"></i> Actores Involucrados</h3>
+                    <ul class="additional-list">
+                        <li><i class="fas fa-circle"></i> <strong>Gobiernos</strong> &mdash; Legislación, supervisión y política pública.</li>
+                        <li><i class="fas fa-circle"></i> <strong>Empresas tech</strong> &mdash; Desarrollo responsable y auditorías internas.</li>
+                        <li><i class="fas fa-circle"></i> <strong>Academia</strong> &mdash; Investigación independiente y evaluación de impactos.</li>
+                        <li><i class="fas fa-circle"></i> <strong>Ciudadanía</strong> &mdash; Participación informada y exigencia de derechos.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- SECTION 6: MENSAJE DEL AUTOR     -->
+    <!-- =============================== -->
+    <section class="dev-message grid-bg">
+        <div class="container">
+            <div class="dev-message-box">
+                <div class="dev-message-icon"><i class="fas fa-quote-left"></i></div>
+                <p class="dev-message-quote">
+                    &ldquo;Cuando usamos la IA, no estamos usando una simple herramienta que busca facilitar nuestras labores cotidianas, estamos usando la culminación lógica de años de esfuerzo matemático y probabilista, para obtener resultados inmediatos, facilitando nuestra vida. No es reemplazo y antagonismo tecnológico, es optimización, y la misma puede ser de gran ayuda, solo si sabemos usarla responsablemente.&rdquo;
+                </p>
+                <p class="dev-message-author">&mdash; Juan Carlos Yepez Kepp</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- SECTION 7: CIERRE               -->
+    <!-- =============================== -->
+    <section class="closing">
+        <div class="container">
+            <div class="closing-label">// CIERRE DE TRANSMISIÓN</div>
+            <h2 class="closing-title">
+                La IA será lo que <span class="gold">decidamos</span> que sea.
+            </h2>
+            <p class="closing-subtitle">
+                Construyamos una tecnología digna del futuro que prometimos.
+            </p>
+
+            <div class="closing-buttons">
+                <a href="#" class="btn btn-white" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+                    <i class="fas fa-arrow-left" style="font-size:0.7rem"></i> Volver al Manual
+                </a>
+                <a href="#capitulo01" class="btn btn-blue-dark">
+                    Repasar Principios <i class="fas fa-arrow-right" style="font-size:0.7rem"></i>
+                </a>
+                <!-- ===== BOTÓN DE DESCARGA PDF ===== -->
+                <!-- Reemplaza #LINK-DEL-PDF-AQUI con la URL de tu PDF -->
+                <a href="#LINK-DEL-PDF-AQUI" target="_blank" class="btn btn-gold" title="Descargar libro de Leyes y Éticas de IA">
+                    <i class="fas fa-file-pdf" style="font-size:0.85rem"></i> Descargar Libro PDF
+                </a>
+            </div>
+        </div>
+
+        <div class="closing-footer">
+            <div class="container">
+                <div class="closing-footer-inner">
+                    <span class="footer-text">&copy; MMXXVI &middot; Manual de Gobernanza en IA</span>
+                    <span class="footer-text-right">VOL.01 / ED. CIVIL / DISTRIBUCIÓN LIBRE</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- AUTHOR BAR                       -->
+    <!-- =============================== -->
+    <div class="author-bar">
+        <span class="author-text">+ Autor &middot; Juan Carlos Yepez Kepp +</span>
+    </div>
+
+</body>
+</html>
